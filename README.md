@@ -13,8 +13,9 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: devbox.chrome }
-
+         - role: devbox.chrome
+           google_talkplugin_enabled: yes                       # Enable module
+           google_agent_pkg_state: installed # Package states: present or installed or latest
 License
 -------
 
