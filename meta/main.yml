@@ -20,7 +20,8 @@ ansigenome_info:
   github_url: "https://github.com/alourie/devbox.chrome"
   git_branch: "master"
   galaxy_id: '1036'
-
+  galaxy_user: 'devbox'
+  
   travis: True
 
   authors:
@@ -41,7 +42,7 @@ ansigenome_info:
     Taken from
     ------------------
     
-    https://github.com/psgrove/devsetup
+    https://github.com/psgrove/ansibledevubuntu
 
   #custom: |
   #  Any custom output you want after the usage section..

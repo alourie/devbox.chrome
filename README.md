@@ -1,6 +1,6 @@
 ## chrome
 
-[![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-chrome.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-chrome) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-chrome.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-chrome/tree/master)  [![Ansible Galaxy](http://img.shields.io/badge/galaxy-AlbanAndrieu.chrome-660198.svg?style=flat)](https://galaxy.ansible.com/list#/roles/1036) [![Platforms](http://img.shields.io/badge/platforms-debian%20/%20elementary os%20/%20ubuntu-lightgrey.svg?style=flat)](#)
+[![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-chrome.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-chrome) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-chrome.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-chrome/tree/master) [![Donate](https://img.shields.io/gratipay/AlbanAndrieu.svg?style=flat)](https://www.gratipay.com/AlbanAndrieu)  [![Ansible Galaxy](http://img.shields.io/badge/galaxy-devbox.chrome-blue.svg?style=flat)](https://galaxy.ansible.com/list#/roles/1036) [![Platforms](http://img.shields.io/badge/platforms-debian%20/%20elementary os%20/%20ubuntu-lightgrey.svg?style=flat)](#)
 
 Install chrome on Ubuntu....
 
@@ -12,7 +12,7 @@ python-pycurl and python-software-properties installed.
 
 This role requires at least Ansible `v1.4`. To install it, run:
 
-    ansible-galaxy install AlbanAndrieu.chrome
+    ansible-galaxy install devbox.chrome
 
 
 
