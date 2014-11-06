@@ -17,7 +17,9 @@ dependencies: []
 
 
 ansigenome_info:
-  galaxy_id: ''
+  github_url: "https://github.com/alourie/devbox.chrome"
+  git_branch: "master"
+  galaxy_id: '1036'
 
   travis: True
 
@@ -26,7 +28,7 @@ ansigenome_info:
 #      url: 'fr.linkedin.com/in/nabla/'
       email: 'djay.il@gmail.com'
       twitter: 'AlbanAndrieu'
-      github: 'AlbanAndrieu'
+      github: ' alourie'
       
   synopsis: |
     Install chrome on Ubuntu....
