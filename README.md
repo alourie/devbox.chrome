@@ -10,7 +10,9 @@ python-pycurl and python-software-properties installed.
 
 ### Installation
 
-This role requires at least Ansible `v1.4`. To install it, run:
+This role requires at least Ansible `v1.4`. 
+
+To install it, run:
 
     ansible-galaxy install devbox.chrome
 
@@ -41,7 +43,7 @@ List of default variables available in the inventory:
 Taken from
 ------------------
 
-https://github.com/psgrove/devsetup
+https://github.com/psgrove/ansibledevubuntu
 
 
 ### Authors and license
@@ -52,7 +54,7 @@ https://github.com/psgrove/devsetup
 
 ### Feedback, bug-reports, requests, ...
 
-Are [welcome](https://github.com/AlbanAndrieu/ansible-chrome/issues>)!
+Are [welcome](https://github.com/AlbanAndrieu/ansible-chrome/issues)!
 
 ***
 
