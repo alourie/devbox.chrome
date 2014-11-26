@@ -37,6 +37,8 @@ List of default variables available in the inventory:
     docker_image_name                        : "nabla/ansible-chrome"
 ```
 
+- Alex Lourie, djay.il@gmail.com
+- Alban Andrieu
 
 ### Detailed usage guide
 
@@ -49,7 +51,8 @@ https://github.com/psgrove/ansibledevubuntu
 ### Authors and license
 
 `chrome` role was written by:
-- Alex Lourie | [e-mail](mailto:djay.il@gmail.com) | [Twitter](https://twitter.com/AlbanAndrieu) | [GitHub](https://github.com/ alourie)
+- Alex Lourie | [e-mail](mailto:djay.il@gmail.com) | [Twitter](https://twitter.com/alourie) | [GitHub](https://github.com/alourie)
+- Alban Andrieu | [Twitter](https://twitter.com/AlbanAndrieu) | [GitHub](https://github.com/AlbanAndrieu)
 - License: [GPLv3](https://tldrlegal.com/license/gnu-general-public-license-v3-%28gpl-3%29)
 
 ### Feedback, bug-reports, requests, ...
