@@ -1,8 +1,9 @@
 ---
+
 galaxy_info:
-  author: "Alex Lourie <djay.il@gmail.com>"
+  author: Alex Lourie and Alban Andrieu
   description: Install Chrome stable on Ubuntu system
-  license: LGPL
+  license: GPLv3
   min_ansible_version: 1.4
   platforms:
   - name: Debian
@@ -13,3 +14,37 @@ galaxy_info:
   categories:
     - system
 dependencies: []
+
+
+ansigenome_info:
+  github_url: "https://github.com/alourie/devbox.chrome"
+  git_branch: "master"
+  galaxy_id: '1036'
+  galaxy_user: 'devbox'
+  
+  travis: True
+
+  authors:
+    - name:  'Alex Lourie'
+      email: 'djay.il@gmail.com'
+      twitter: 'alourie'
+      github: ' alourie'
+    - name:  'Alban Andrieu'
+      url: 'fr.linkedin.com/in/nabla/'
+      twitter: 'AlbanAndrieu'
+      
+  synopsis: |
+    Install chrome on Ubuntu....
+    
+    ###Requirements
+    
+    python-pycurl and python-software-properties installed.
+
+  usage: |    
+    Taken from
+    ------------------
+    
+    https://github.com/psgrove/ansibledevubuntu
+
+  #custom: |
+  #  Any custom output you want after the usage section..
