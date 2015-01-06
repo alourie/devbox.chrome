@@ -10,3 +10,5 @@ docker_files_generated_directory         : "roles/chrome"
 docker_volume_directory                  : ""
 docker_working_directory                 : "/home/vagrant"
 docker_image_name                        : "nabla/ansible-chrome"
+google_repo_files                        :
+       - "google-chrome.list"

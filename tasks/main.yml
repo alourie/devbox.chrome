@@ -35,3 +35,10 @@
 - name: Install Google Talk Plugin
   yum: name=google-talkplugin state={{ google_agent_pkg_state }}
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_talkplugin_enabled
+
+- name: Remove duplicate entry.
+  file: name=/etc/apt/sources.list.d/{{ item }} state=absent
+  sudo: yes
+  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) 
+  with_items: google_repo_files
+  
