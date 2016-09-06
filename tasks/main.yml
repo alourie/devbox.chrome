@@ -3,7 +3,7 @@
 - name: Add Google Chrome key
   apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state={{ google_agent_repository_state }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and ( google_chrome_stable_enabled or google_talkplugin_enabled )
-  
+
 - name: Add Google Chrome repo
   apt_repository: repo="deb http://dl.google.com/linux/chrome/deb/ stable main" update_cache=yes state={{ google_agent_repository_state }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )  and ( google_chrome_stable_enabled or google_talkplugin_enabled )
@@ -23,22 +23,21 @@
 - name: Enable Yum repo for Google Chrome
   copy: dest=/etc/yum.repos.d/google-chrome.repo src=google-chrome.repo
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_chrome_stable_enabled
-  
+
 - name: Install Google Chrome
   yum: name=google-chrome-stable state={{ google_agent_pkg_state }}
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_chrome_stable_enabled
-  
+
 - name: Enable Yum repo for Google Talk
   copy: dest=/etc/yum.repos.d/google-talkplugin.repo src=google-talkplugin.repo
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_talkplugin_enabled
-  
+
 - name: Install Google Talk Plugin
   yum: name=google-talkplugin state={{ google_agent_pkg_state }}
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_talkplugin_enabled
 
 - name: Remove duplicate entry.
   file: name=/etc/apt/sources.list.d/{{ item }} state=absent
-  sudo: yes
-  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) 
+  become: yes
+  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )
   with_items: google_repo_files
-  

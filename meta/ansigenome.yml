@@ -1,0 +1,33 @@
+
+ansigenome_info:
+  github_url: "https://github.com/alourie/devbox.chrome"
+  git_branch: "master"
+  galaxy_id: '1036'
+  galaxy_user: 'devbox'
+
+  travis: True
+
+  authors:
+    - name:  'Alex Lourie'
+      email: 'djay.il@gmail.com'
+      twitter: 'alourie'
+      github: ' alourie'
+    - name:  'Alban Andrieu'
+      url: 'fr.linkedin.com/in/nabla/'
+      twitter: 'AlbanAndrieu'
+
+  synopsis: |
+    Install chrome on Ubuntu....
+
+    ###Requirements
+
+    python-pycurl and python-software-properties installed.
+
+  usage: |
+    Taken from
+    ------------------
+
+    https://github.com/psgrove/ansibledevubuntu
+
+  #custom: |
+  #  Any custom output you want after the usage section..
