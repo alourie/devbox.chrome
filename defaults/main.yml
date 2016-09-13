@@ -5,10 +5,10 @@ google_talkplugin_enabled: no                       # Disbale module
 google_agent_pkg_state: present
 # Repository states: present or absent
 google_agent_repository_state: present
+google_repo_files                        :
+       - "google-chrome.list"
 
 docker_files_generated_directory         : "roles/chrome"
 docker_volume_directory                  : ""
 docker_working_directory                 : "/home/vagrant"
 docker_image_name                        : "nabla/ansible-chrome"
-google_repo_files                        :
-       - "google-chrome.list"
