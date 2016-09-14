@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  sudo: true
+  become: true
   roles:
     - { role: ./ }
-
-#- include: ./integration-tests.yml
