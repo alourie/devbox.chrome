@@ -1,17 +1,26 @@
 ---
 
+#TDOD https://chrome.richardlloyd.org.uk/
+#- name: Install required C++ librairies (RedHat based)
+#  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ google_agent_pkg_state|default('present') }} update_cache=yes"
+#  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+#  tags: cpp
+#  with_items:
+#   - libstdc++.so.6
+#  become: yes
+
 - name: Add Google Chrome key (apt)
-  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state={{ google_agent_repository_state }}
+  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state={{ google_agent_repository_state|default('yes') }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and ( google_chrome_stable_enabled or google_talkplugin_enabled )
   become: yes
 
 - name: Add Google Chrome repo (apt)
-  apt_repository: repo="deb http://dl.google.com/linux/chrome/deb/ stable main" update_cache=yes state={{ google_agent_repository_state }}
+  apt_repository: repo="deb http://dl.google.com/linux/chrome/deb/ stable main" update_cache=yes state={{ google_agent_repository_state|default('yes') }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )  and ( google_chrome_stable_enabled or google_talkplugin_enabled )
   become: yes
 
 - name: Install Google Chrome (apt)
-  apt: pkg=google-chrome-stable state={{ google_agent_pkg_state }}
+  apt: pkg=google-chrome-stable state={{ google_agent_pkg_state|default('present') }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_chrome_stable_enabled
   become: yes
 
@@ -21,7 +30,7 @@
   become: yes
 
 - name: Install Google Talk Plugin (apt)
-  apt: pkg=google-talkplugin state={{ google_agent_pkg_state }}
+  apt: pkg=google-talkplugin state={{ google_agent_pkg_state|default('present') }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_talkplugin_enabled
   become: yes
 
@@ -31,7 +40,7 @@
   become: yes
 
 - name: Install Google Chrome (yum)
-  yum: name=google-chrome-stable state={{ google_agent_pkg_state }}
+  yum: name=google-chrome-stable state={{ google_agent_pkg_state|default('present') }}
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_chrome_stable_enabled
   become: yes
 
@@ -41,7 +50,7 @@
   become: yes
 
 - name: Install Google Talk Plugin (yum)
-  yum: name=google-talkplugin state={{ google_agent_pkg_state }}
+  yum: name=google-talkplugin state={{ google_agent_pkg_state |default('present')}}
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_talkplugin_enabled
   become: yes
 

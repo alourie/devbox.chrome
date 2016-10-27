@@ -13,13 +13,15 @@ ansigenome_info:
       twitter: 'alourie'
       github: ' alourie'
     - name:  'Alban Andrieu'
+      email: 'alban.andrieu@free.com'
       url: 'fr.linkedin.com/in/nabla/'
       twitter: 'AlbanAndrieu'
+      github: 'AlbanAndrieu'
 
   synopsis: |
     Install chrome on Ubuntu....
 
-    ###Requirements
+    ### Requirements
 
     python-pycurl and python-software-properties installed.
 
@@ -29,5 +31,8 @@ ansigenome_info:
 
     https://github.com/psgrove/ansibledevubuntu
 
-  #custom: |
-  #  Any custom output you want after the usage section..
+  custom: |
+    ### Contributor
+
+    - Alex Lourie, djay.il@gmail.com
+    - Alban Andrieu, alban.andrieu@free.com

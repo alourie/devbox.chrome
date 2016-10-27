@@ -5,8 +5,10 @@ google_talkplugin_enabled: no                       # Disbale module
 google_agent_pkg_state: present
 # Repository states: present or absent
 google_agent_repository_state: present
-google_repo_files                        :
-       - "google-chrome.list"
+google_repo_files :
+  - "google-chrome.list"
+  - "dl_google_com_linux_chrome_deb.list"
+  - "dl_google_com_linux_talkplugin_deb.list"
 
 docker_files_generated_directory         : "roles/chrome"
 docker_volume_directory                  : ""
