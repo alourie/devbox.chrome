@@ -15,9 +15,24 @@
   become: yes
 
 - name: Add Google Chrome repo (apt)
-  apt_repository: repo="deb http://dl.google.com/linux/chrome/deb/ stable main" update_cache=yes state={{ google_agent_repository_state|default('yes') }}
+  apt_repository: repo="deb http://dl.google.com/linux/chrome/deb/ stable main" state={{ google_agent_repository_state|default('yes') }} update_cache=no
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )  and ( google_chrome_stable_enabled or google_talkplugin_enabled )
   become: yes
+
+#Issue https://askubuntu.com/questions/724093/no-more-updates-for-google-chrome-apt-get-update-error
+#TODO
+#sudo sed -i -e 's/deb http/deb [arch=amd64] http/' "/etc/apt/sources.list.d/google-chrome.list" "/opt/google/chrome/cron/google-chrome"
+- name: Fix Google drop support for 32 bits
+  command: sed -i -e 's/deb http/deb [arch=amd64] http/' "/etc/apt/sources.list.d/dl_google_com_linux_chrome_deb.list"
+  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and ( google_chrome_stable_enabled or google_talkplugin_enabled )
+  changed_when: false
+  become: yes
+  ignore_errors: yes
+
+- name: Update the apt cache (in case of issue)
+  action: apt update-cache=yes
+  become: yes
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Install Google Chrome (apt)
   apt: pkg=google-chrome-stable state={{ google_agent_pkg_state|default('present') }}
