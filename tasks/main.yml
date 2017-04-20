@@ -73,4 +73,4 @@
   file: name=/etc/apt/sources.list.d/{{ item }} state=absent
   become: yes
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )
-  with_items: google_repo_files
+  with_items: "google_repo_files"
