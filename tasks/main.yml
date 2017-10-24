@@ -16,7 +16,7 @@
 
 - name: Add Google Chrome repo (apt)
   apt_repository: repo="deb http://dl.google.com/linux/chrome/deb/ stable main" state={{ google_agent_repository_state|default('yes') }} update_cache=no
-  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )  and ( google_chrome_stable_enabled or google_talkplugin_enabled )
+  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and ansible_architecture in ['x86_64'] and ( google_chrome_stable_enabled or google_talkplugin_enabled )
   become: yes
 
 #Issue https://askubuntu.com/questions/724093/no-more-updates-for-google-chrome-apt-get-update-error
@@ -35,7 +35,7 @@
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Install Google Chrome (apt)
-  apt: pkg=google-chrome-stable state={{ google_agent_pkg_state|default('present') }}
+  apt: pkg=google-chrome-stable update_cache=yes state={{ google_agent_pkg_state|default('present') }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_chrome_stable_enabled
   become: yes
 
@@ -73,4 +73,4 @@
   file: name=/etc/apt/sources.list.d/{{ item }} state=absent
   become: yes
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )
-  with_items: "google_repo_files"
+  with_items: "{{ google_repo_files }}"
