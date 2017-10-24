@@ -9,7 +9,6 @@
 [![test-suite](https://img.shields.io/badge/test--suite-ansible--chrome-blue.svg?style=flat)](https://github.com/AlbanAndrieu/test-suite/tree/master/ansible-chrome/)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-devbox.chrome-660198.svg?style=flat)](https://galaxy.ansible.com/detail#/role/1036)
 [![Gittip](http://img.shields.io/gittip/alban.andrieu.svg)](https://www.gittip.com/alban.andrieu/)
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=AlbanAndrieu&url=https://github.com/alban.andrieu/ansible-phpvirtualbox&title=Ansible Role: PhpVirtualbox&language=&tags=github&category=software)
 
 Install chrome on Ubuntu....
 
