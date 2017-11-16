@@ -50,11 +50,7 @@
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Install Google Chrome (apt)
-<<<<<<< HEAD
-  apt: pkg=google-chrome-stable state={{ google_agent_pkg_state|default('present') }}
-=======
-  apt: pkg=google-chrome-stable update_cache=yes state={{ google_agent_pkg_state|default('present') }}
->>>>>>> b589ca6ef1175a072aa289d1f1df634fa0094d20
+  apt: pkg=google-chrome-stable state="{{ google_agent_pkg_state|default('present') }}"
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_chrome_stable_enabled
   become: yes
 
@@ -64,8 +60,10 @@
   become: yes
 
 - name: Install Google Talk Plugin (apt)
-  apt: pkg=google-talkplugin state={{ google_agent_pkg_state|default('present') }}
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_talkplugin_enabled
+  with_items:
+   - google-talkplugin
   become: yes
 
 - name: Enable Yum repo for Google Chrome (yum)
@@ -74,7 +72,9 @@
   become: yes
 
 - name: Install Google Chrome (yum)
-  yum: name=google-chrome-stable state={{ google_agent_pkg_state|default('present') }}
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
+  with_items:
+   - google-chrome-stable 
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_chrome_stable_enabled
   become: yes
 
@@ -84,7 +84,9 @@
   become: yes
 
 - name: Install Google Talk Plugin (yum)
-  yum: name=google-talkplugin state={{ google_agent_pkg_state |default('present')}}
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
+  with_items:
+   - google-talkplugin
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_talkplugin_enabled
   become: yes
 
@@ -92,8 +94,4 @@
   file: name=/etc/apt/sources.list.d/{{ item }} state=absent
   become: yes
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )
-<<<<<<< HEAD
-  with_items: "google_repo_files"
-=======
   with_items: "{{ google_repo_files }}"
->>>>>>> b589ca6ef1175a072aa289d1f1df634fa0094d20
