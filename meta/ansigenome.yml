@@ -38,17 +38,19 @@ ansigenome_info:
       github: 'AlbanAndrieu'
 
   synopsis: |
-    Install chrome on Ubuntu....
+    Install google-chrome-stable (64bits) on Ubuntu and RedHat....
 
     ### Requirements
 
+	```
     python-pycurl and python-software-properties installed.
+    ```
 
   usage: |
     Taken from
     ------------------
 
-    https://github.com/psgrove/ansibledevubuntu
+    https://github.com/alourie/devbox.chrome
 
   custom: |
     ### Contributor
