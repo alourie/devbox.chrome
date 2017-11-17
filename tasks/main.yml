@@ -28,7 +28,7 @@
 - name: Install Google Chrome (apt)
   action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
   with_items:
-    - google-chrome-stable  
+    - google-chrome-stable
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_chrome_stable_enabled
   become: yes
 
