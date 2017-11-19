@@ -1,14 +1,5 @@
 ---
 
-#TDOD https://chrome.richardlloyd.org.uk/
-#- name: Install required C++ librairies (RedHat based)
-#  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ google_agent_pkg_state|default('present') }} update_cache=yes"
-#  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-#  tags: cpp
-#  with_items:
-#   - libstdc++.so.6
-#  become: yes
-
 - name: Add Google Chrome key (apt)
   apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state={{ google_agent_repository_state|default('yes') }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and ( google_chrome_stable_enabled or google_talkplugin_enabled )
@@ -35,7 +26,9 @@
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Install Google Chrome (apt)
-  apt: pkg=google-chrome-stable update_cache=yes state={{ google_agent_pkg_state|default('present') }}
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
+  with_items:
+    - google-chrome-stable
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_chrome_stable_enabled
   become: yes
 
@@ -45,17 +38,31 @@
   become: yes
 
 - name: Install Google Talk Plugin (apt)
-  apt: pkg=google-talkplugin state={{ google_agent_pkg_state|default('present') }}
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_talkplugin_enabled
+  with_items:
+   - google-talkplugin
   become: yes
 
+- name: Install google-chrome-stable prerequisite
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ jenkins_pkg_state|default('present') }}"
+  when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'RedHat')
+  with_items:
+    - redhat-lsb 
+    - libXScrnSaver
+#    - google-chrome-stable_current_x86_64.rpm
+  become: yes
+  changed_when: false
+  
 - name: Enable Yum repo for Google Chrome (yum)
   copy: dest=/etc/yum.repos.d/google-chrome.repo src=google-chrome.repo
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_chrome_stable_enabled
   become: yes
 
 - name: Install Google Chrome (yum)
-  yum: name=google-chrome-stable state={{ google_agent_pkg_state|default('present') }}
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
+  with_items:
+   - google-chrome-stable
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_chrome_stable_enabled
   become: yes
 
@@ -65,7 +72,9 @@
   become: yes
 
 - name: Install Google Talk Plugin (yum)
-  yum: name=google-talkplugin state={{ google_agent_pkg_state |default('present')}}
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
+  with_items:
+   - google-talkplugin
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_talkplugin_enabled
   become: yes
 
