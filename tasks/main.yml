@@ -1,14 +1,5 @@
 ---
 
-#TDOD https://chrome.richardlloyd.org.uk/
-#- name: Install required C++ librairies (RedHat based)
-#  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ google_agent_pkg_state|default('present') }} update_cache=yes"
-#  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-#  tags: cpp
-#  with_items:
-#   - libstdc++.so.6
-#  become: yes
-
 - name: Add Google Chrome key (apt)
   apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state={{ google_agent_repository_state|default('yes') }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and ( google_chrome_stable_enabled or google_talkplugin_enabled )
@@ -34,23 +25,10 @@
   become: yes
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
-#Issue https://askubuntu.com/questions/724093/no-more-updates-for-google-chrome-apt-get-update-error
-#TODO
-#sudo sed -i -e 's/deb http/deb [arch=amd64] http/' "/etc/apt/sources.list.d/google-chrome.list" "/opt/google/chrome/cron/google-chrome"
-- name: Fix Google drop support for 32 bits
-  command: sed -i -e 's/deb http/deb [arch=amd64] http/' "/etc/apt/sources.list.d/dl_google_com_linux_chrome_deb.list"
-  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and ( google_chrome_stable_enabled or google_talkplugin_enabled )
-  changed_when: false
-  become: yes
-  ignore_errors: yes
-
-- name: Update the apt cache (in case of issue)
-  action: apt update-cache=yes
-  become: yes
-  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
-
 - name: Install Google Chrome (apt)
-  apt: pkg=google-chrome-stable state="{{ google_agent_pkg_state|default('present') }}"
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
+  with_items:
+    - google-chrome-stable
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and google_chrome_stable_enabled
   become: yes
 
@@ -66,6 +44,16 @@
    - google-talkplugin
   become: yes
 
+- name: Install google-chrome-stable prerequisite
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ jenkins_pkg_state|default('present') }}"
+  when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'RedHat')
+  with_items:
+    - redhat-lsb 
+    - libXScrnSaver
+#    - google-chrome-stable_current_x86_64.rpm
+  become: yes
+  changed_when: false
+  
 - name: Enable Yum repo for Google Chrome (yum)
   copy: dest=/etc/yum.repos.d/google-chrome.repo src=google-chrome.repo
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_chrome_stable_enabled
@@ -74,7 +62,7 @@
 - name: Install Google Chrome (yum)
   action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ google_agent_pkg_state|default('present') }}"
   with_items:
-   - google-chrome-stable 
+   - google-chrome-stable
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_chrome_stable_enabled
   become: yes
 
