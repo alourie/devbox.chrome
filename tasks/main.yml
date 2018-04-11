@@ -48,7 +48,7 @@
   action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ jenkins_pkg_state|default('present') }}"
   when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'RedHat')
   with_items:
-    - redhat-lsb 
+#    - redhat-lsb
     - libXScrnSaver
 #    - google-chrome-stable_current_x86_64.rpm
   become: yes
