@@ -1,5 +1,11 @@
 ---
 
+- name: Remove duplicate entry.
+  file: name=/etc/apt/sources.list.d/{{ item }} state=absent
+  become: yes
+  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )
+  with_items: "{{ google_repo_files }}"
+
 - name: Add Google Chrome key (apt)
   apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state={{ google_agent_repository_state|default('yes') }}
   when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' ) and ( google_chrome_stable_enabled or google_talkplugin_enabled )
@@ -48,9 +54,7 @@
   action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ jenkins_pkg_state|default('present') }}"
   when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'RedHat')
   with_items:
-    - redhat-lsb 
     - libXScrnSaver
-#    - google-chrome-stable_current_x86_64.rpm
   become: yes
   changed_when: false
   
@@ -77,9 +81,3 @@
    - google-talkplugin
   when: ( ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' ) and google_talkplugin_enabled
   become: yes
-
-- name: Remove duplicate entry.
-  file: name=/etc/apt/sources.list.d/{{ item }} state=absent
-  become: yes
-  when: ( ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' )
-  with_items: "{{ google_repo_files }}"
